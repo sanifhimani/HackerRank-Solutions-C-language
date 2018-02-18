@@ -1,0 +1,81 @@
+/*  Question
+Given a time in 12-hour AM/PM format, convert it to military (24-hour) time.
+
+Note: Midnight is 12:00:00AM on a 12-hour clock, and 00:00:00 on a 24-hour clock. Noon is 12:00:00PM on a 12-hour clock, and 12:00:00 on a 24-hour clock. */
+
+/* Solution */
+
+#include <math.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <limits.h>
+#include <stdbool.h>
+
+char* timeConversion(char* s) {
+    // Complete this function
+    int len = strlen(s), hr=0, i, j;
+    const char *am_pm = &s[len-2];
+    char hour[3], str[25];
+    static char final_string[25]; //to avoid sending address of variable error i.e. as soon as it returns it gets destroyed
+    
+    //Coping hour from the string to hour variable
+    strncpy(hour, s, 2);
+    
+    //Removing Hour from the original String
+    s += 2;
+    
+    hr = atoi(hour); //ASCII to integer function to get hours in integer
+    
+    if(strcmp(am_pm, "PM") == 0 && hr == 12)
+    {
+        hr == hr;
+        snprintf(str, sizeof(str), "%d", hr);
+    }
+    else if(strcmp(am_pm, "PM") == 0)
+    {
+        hr += 12;
+        snprintf(str, sizeof(str), "%d", hr);
+    }
+    else if(strcmp(am_pm, "AM") == 0 && hr == 12)
+    {
+        hr = 0;
+        snprintf(str, sizeof(str), "0%d", hr); //Adding a 0 in the front
+    }
+    else if(strcmp(am_pm, "AM") == 0)
+    {
+        if(hr<10)
+        {
+            hr == hr;
+            snprintf(str, sizeof(str), "0%d", hr); //Adding a 0 in the front
+        }
+        else
+        {
+            hr == hr;
+            snprintf(str, sizeof(str), "%d", hr);
+        }
+    }
+    
+    //Concatenation of strings
+    for(i = 0; str[i] != '\0'; ++i);
+        for(j = 0; s[j] != '\0'; ++j, ++i)
+        {
+            str[i] = s[j];
+        }
+    str[i] = '\0';
+    
+    str[strlen(str) - 2] = '\0'; //Removing last two terms i.e. AM or PM from the final string
+    strcpy(final_string, str);
+    
+    return final_string;
+}
+
+int main() {
+    char* s = (char *)malloc(512000 * sizeof(char));
+    scanf("%s", s);
+        int result_size;
+char* result = timeConversion(s);
+    printf("%s\n", result);
+    return 0;
+}
