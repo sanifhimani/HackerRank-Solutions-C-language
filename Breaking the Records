@@ -1,4 +1,9 @@
 //Breaking the Records
+/* Question
+Given Maria's scores for a season, find and print the number of times she breaks her records for most and least points scored during the season
+*/
+
+//Solution
 
 #include <assert.h>
 #include <limits.h>
